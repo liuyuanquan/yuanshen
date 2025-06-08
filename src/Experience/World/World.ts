@@ -4,7 +4,7 @@ import { Howl } from "howler";
 
 import type Experience from "../Experience";
 
-// import GradientBackground from "./GradientBackground";
+import GradientBackground from "./GradientBackground";
 
 export default class World extends kokomi.Component {
   declare base: Experience;
@@ -16,8 +16,8 @@ export default class World extends kokomi.Component {
     this.base.am.on("ready", async () => {
       this.base.scene.fog = new THREE.Fog(0x389af2, 5000, 10000);
 
-      // this.gb = new GradientBackground(this.base);
-      // this.gb.addExisting();
+      this.gb = new GradientBackground(this.base);
+      this.gb.addExisting();
 
       await kokomi.sleep(1000);
 

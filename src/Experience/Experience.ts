@@ -3,10 +3,13 @@ import * as THREE from "three";
 
 import World from "./World/World";
 
+import Debug from "./Debug";
+
 import { resources } from "./resources";
 
 export default class Experience extends kokomi.Base {
   world: World;
+  debug: Debug;
   am: kokomi.AssetManager;
   constructor(sel = "#sketch") {
     super(sel, {
@@ -14,6 +17,8 @@ export default class Experience extends kokomi.Base {
     });
 
     (window as any).experience = this;
+
+    this.debug = new Debug();
 
     kokomi.enableShadow(this.renderer);
 
