@@ -8,6 +8,8 @@ import GradientBackground from "./GradientBackground";
 import BigCloud from "./BigCloud";
 import Column from "./Column";
 import Cloud from "./Cloud";
+import PolarLight from "./PolarLight";
+import StarParticle from "./StarParticle";
 
 export default class World extends kokomi.Component {
   declare base: Experience;
@@ -15,6 +17,8 @@ export default class World extends kokomi.Component {
   bc!: BigCloud | null;
   co!: Column | null;
   cl!: Cloud | null;
+  pl!: PolarLight | null;
+  sp!: StarParticle | null;
   bgm!: Howl;
   constructor(base: Experience) {
     super(base);
@@ -30,6 +34,10 @@ export default class World extends kokomi.Component {
       this.co.addExisting();
       this.cl = new Cloud(this.base);
       this.cl.addExisting();
+      this.pl = new PolarLight(this.base);
+      this.pl.addExisting();
+      this.sp = new StarParticle(this.base);
+      this.sp.addExisting();
 
       await kokomi.sleep(1000);
 

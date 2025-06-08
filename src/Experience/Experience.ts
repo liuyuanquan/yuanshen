@@ -34,7 +34,7 @@ export default class Experience extends kokomi.Base {
     camera.rotation.x = THREE.MathUtils.degToRad(5.5);
     camera.updateProjectionMatrix();
 
-    new kokomi.OrbitControls(this);
+    // new kokomi.OrbitControls(this);
 
     this.world = new World(this);
   }
