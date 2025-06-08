@@ -95,7 +95,7 @@ export default class Column extends kokomi.Component {
    * 每帧更新
    */
   update(): void {
-    // this.keepInfinite();
+    this.keepInfinite();
     this.updateInstance();
   }
 

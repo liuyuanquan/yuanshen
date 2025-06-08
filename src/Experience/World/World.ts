@@ -13,6 +13,7 @@ import GradientBackground from "./GradientBackground";
 import BigCloud from "./BigCloud";
 import Cloud from "./Cloud";
 import HashFog from "./HashFog";
+import ForwardCamera from "./ForwardCamera";
 
 export default class World extends kokomi.Component {
   declare base: Experience;
@@ -25,6 +26,7 @@ export default class World extends kokomi.Component {
   bc!: BigCloud | null;
   cl!: Cloud | null;
   hf!: HashFog | null;
+  fc!: ForwardCamera | null;
   bgm!: Howl;
   constructor(base: Experience) {
     super(base);
@@ -53,8 +55,8 @@ export default class World extends kokomi.Component {
       this.hf.addExisting();
       // this.ro = new Road(this.base);
       // this.ro.addExisting();
-      // this.fc = new ForwardCamera(this.base);
-      // this.fc.addExisting();
+      this.fc = new ForwardCamera(this.base);
+      this.fc.addExisting();
 
       await kokomi.sleep(1000);
 

@@ -98,6 +98,14 @@ export default class Cloud extends kokomi.Component {
     this.container.add(this.instancedMesh);
     this.updateInstance();
   }
+
+  /**
+   * 每帧更新
+   */
+  update(): void {
+    this.uj.injectShadertoyUniforms(this.material.uniforms);
+    this.keepInfinite();
+  }
   // 将所有物体属性同步到网格上
   updateInstance() {
     this.meshInfos.forEach((item, i) => {
@@ -120,6 +128,25 @@ export default class Cloud extends kokomi.Component {
       debugFolder.addColor(params, "color2").onChange((val: string) => {
         material.uniforms.uColor2.value = new THREE.Color(val);
       });
+    }
+  }
+  /**
+   * 无限延伸效果：将超出视野的云层循环到场景前方，实现“无尽”视觉
+   */
+  keepInfinite() {
+    if (this.instancedMesh) {
+      // 如果最后一个云层已经超过相机，则将其移到最前面
+      if (
+        this.meshInfos[this.meshInfos.length - 1].position.z >
+        this.base.camera.position.z
+      ) {
+        const firstElement = this.meshInfos.pop();
+        if (firstElement) {
+          firstElement.position.z -= config.totalZ * 0.1;
+          this.meshInfos.unshift(firstElement);
+          this.updateInstance();
+        }
+      }
     }
   }
 }
