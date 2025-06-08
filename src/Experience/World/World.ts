@@ -5,10 +5,12 @@ import { Howl } from "howler";
 import type Experience from "../Experience";
 
 import GradientBackground from "./GradientBackground";
+import BigCloud from "./BigCloud";
 
 export default class World extends kokomi.Component {
   declare base: Experience;
   gb!: GradientBackground | null;
+  bc!: BigCloud | null;
   bgm!: Howl;
   constructor(base: Experience) {
     super(base);
@@ -18,6 +20,8 @@ export default class World extends kokomi.Component {
 
       this.gb = new GradientBackground(this.base);
       this.gb.addExisting();
+      this.bc = new BigCloud(this.base);
+      this.bc.addExisting();
 
       await kokomi.sleep(1000);
 
