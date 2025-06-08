@@ -4,6 +4,7 @@ import { Howl } from "howler";
 
 import type Experience from "../Experience";
 
+import AmbientLightComponent from "./AmbientLightComponent";
 import GradientBackground from "./GradientBackground";
 import BigCloud from "./BigCloud";
 import Column from "./Column";
@@ -15,6 +16,7 @@ import HashFog from "./HashFog";
 export default class World extends kokomi.Component {
   declare base: Experience;
   bgm!: Howl;
+  alc!: AmbientLightComponent | null;
   gb!: GradientBackground | null;
   bc!: BigCloud | null;
   co!: Column | null;
@@ -28,6 +30,8 @@ export default class World extends kokomi.Component {
     this.base.am.on("ready", async () => {
       this.base.scene.fog = new THREE.Fog(0x389af2, 5000, 10000);
 
+      this.alc = new AmbientLightComponent(this.base);
+      this.alc.addExisting();
       this.gb = new GradientBackground(this.base);
       this.gb.addExisting();
       this.bc = new BigCloud(this.base);
