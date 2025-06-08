@@ -10,16 +10,18 @@ import Column from "./Column";
 import Cloud from "./Cloud";
 import PolarLight from "./PolarLight";
 import StarParticle from "./StarParticle";
+import HashFog from "./HashFog";
 
 export default class World extends kokomi.Component {
   declare base: Experience;
+  bgm!: Howl;
   gb!: GradientBackground | null;
   bc!: BigCloud | null;
   co!: Column | null;
   cl!: Cloud | null;
   pl!: PolarLight | null;
   sp!: StarParticle | null;
-  bgm!: Howl;
+  hf!: HashFog | null;
   constructor(base: Experience) {
     super(base);
 
@@ -38,6 +40,8 @@ export default class World extends kokomi.Component {
       this.pl.addExisting();
       this.sp = new StarParticle(this.base);
       this.sp.addExisting();
+      this.hf = new HashFog(this.base);
+      this.hf.addExisting();
 
       await kokomi.sleep(1000);
 
