@@ -11,6 +11,9 @@ importers:
       '@alphardex/aqua.css':
         specifier: ^1.7.0
         version: 1.7.0
+      howler:
+        specifier: ^2.2.4
+        version: 2.2.4
       kokomi.js:
         specifier: ^1.10.2
         version: 1.10.2(three@0.177.0)
@@ -483,6 +486,9 @@ packages:
   he@1.2.0:
     resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
     hasBin: true
+
+  howler@2.2.4:
+    resolution: {integrity: sha512-iARIBPgcQrwtEr+tALF+rapJ8qSc+Set2GJQl7xT1MQzWaVkFebdJhR3alVlSiUf5U7nAANKuj3aWpwerocD5w==}
 
   imagesloaded@5.0.0:
     resolution: {integrity: sha512-/0JGSubc1MTCoDKVmonLHgbifBWHdyLkun+R/151E1c5n79hiSxcd7cB7mPXFgojYu8xnRZv7GYxzKoxW8BetQ==}
@@ -1025,6 +1031,8 @@ snapshots:
   gsap@3.13.0: {}
 
   he@1.2.0: {}
+
+  howler@2.2.4: {}
 
   imagesloaded@5.0.0:
     dependencies:

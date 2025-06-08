@@ -1,9 +1,12 @@
 import * as kokomi from "kokomi.js";
 import * as THREE from "three";
 
+import World from "./World/World";
+
 import { resources } from "./resources";
 
 export default class Experience extends kokomi.Base {
+  world: World;
   am: kokomi.AssetManager;
   constructor(sel = "#sketch") {
     super(sel, {
@@ -27,5 +30,7 @@ export default class Experience extends kokomi.Base {
     camera.updateProjectionMatrix();
 
     new kokomi.OrbitControls(this);
+
+    this.world = new World(this);
   }
 }
