@@ -5,6 +5,8 @@ import * as STDLIB from "three-stdlib";
 import type Experience from "../Experience";
 
 import { meshList } from "../Data/column";
+// import { getToonMaterialColumn } from "../utils";
+import config from "../config";
 
 /**
  * 柱子组件，负责批量实例化和管理场景中的柱子对象
@@ -60,10 +62,14 @@ export default class Column extends kokomi.Component {
       // @ts-ignore
       model.scene.traverse((obj: THREE.Mesh) => {
         if (obj.isMesh) {
+          const material = obj.material as THREE.MeshStandardMaterial;
+          // 替换为 toon 风格材质
+          // const toonMaterial = getToonMaterialColumn(material);
+          const toonMaterial = material.clone();
           // 创建实例化网格
           const im = new THREE.InstancedMesh(
             obj.geometry,
-            obj.material,
+            toonMaterial,
             item.instanceList.length // 实例数量（即要生成多少个柱子）
           );
           im.castShadow = true; // 允许该实例化网格投射阴影
@@ -89,6 +95,7 @@ export default class Column extends kokomi.Component {
    * 每帧更新
    */
   update(): void {
+    // this.keepInfinite();
     this.updateInstance();
   }
 
@@ -105,6 +112,21 @@ export default class Column extends kokomi.Component {
           mesh.setMatrixAt(i, tempMatrix); // 将变换矩阵设置到 InstancedMesh 的第 i 个实例
         });
         mesh.instanceMatrix.needsUpdate = true; // Three.js 才会在下次渲染时把新的矩阵数据同步到 GPU，渲染出最新的实例效果。
+      });
+    });
+  }
+
+  /**
+   * 无限延伸效果：将超出视野的柱子循环到场景前方，实现“无尽”视觉
+   */
+  keepInfinite() {
+    this.instanceInfos.forEach((item) => {
+      item.meshList.forEach(() => {
+        item.instanceList.forEach((e) => {
+          if (e.position.z > this.base.camera.position.z + 2000) {
+            e.position.z -= config.totalZ * 0.1;
+          }
+        });
       });
     });
   }

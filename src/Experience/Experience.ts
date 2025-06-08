@@ -5,11 +5,14 @@ import World from "./World/World";
 
 import Debug from "./Debug";
 
+import Postprocessing from "./Postprocessing";
+
 import { resources } from "./resources";
 
 export default class Experience extends kokomi.Base {
   world: World;
   debug: Debug;
+  post: Postprocessing;
   am: kokomi.AssetManager;
   constructor(sel = "#sketch") {
     super(sel, {
@@ -22,10 +25,16 @@ export default class Experience extends kokomi.Base {
 
     kokomi.enableShadow(this.renderer);
 
+    // 新版three.js的颜色、光照与旧版不兼容，要手动调整
+    THREE.ColorManagement.enabled = false;
+    this.renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
+    this.renderer.useLegacyLights = true;
+
     this.am = new kokomi.AssetManager(this, resources, {
       useDracoLoader: true,
     });
 
+    // this.camera.position.set(0, 0, 1);
     this.camera.position.set(0, 0, 0);
     const camera = this.camera as THREE.PerspectiveCamera;
     camera.fov = 45;
@@ -37,5 +46,15 @@ export default class Experience extends kokomi.Base {
     // new kokomi.OrbitControls(this);
 
     this.world = new World(this);
+
+    this.post = new Postprocessing(this);
+
+    // this.world.on("blur-behind", () => {
+    //   this.post.blurBehind();
+    // });
+
+    // this.world.on("bloom-in", () => {
+    //   this.post.bloomTransitionIn();
+    // });
   }
 }

@@ -6,42 +6,43 @@ import type Experience from "../Experience";
 
 import AmbientLightComponent from "./AmbientLightComponent";
 import DirectionalLightComponent from "./DirectionalLightComponent";
-import GradientBackground from "./GradientBackground";
-import BigCloud from "./BigCloud";
-import Column from "./Column";
-import Cloud from "./Cloud";
 import PolarLight from "./PolarLight";
 import StarParticle from "./StarParticle";
+import Column from "./Column";
+import GradientBackground from "./GradientBackground";
+import BigCloud from "./BigCloud";
+import Cloud from "./Cloud";
 import HashFog from "./HashFog";
 
 export default class World extends kokomi.Component {
   declare base: Experience;
-  bgm!: Howl;
   alc!: AmbientLightComponent | null;
   dlc!: DirectionalLightComponent | null;
-  gb!: GradientBackground | null;
-  bc!: BigCloud | null;
-  co!: Column | null;
-  cl!: Cloud | null;
   pl!: PolarLight | null;
   sp!: StarParticle | null;
+  co!: Column | null;
+  gb!: GradientBackground | null;
+  bc!: BigCloud | null;
+  cl!: Cloud | null;
   hf!: HashFog | null;
+  bgm!: Howl;
   constructor(base: Experience) {
     super(base);
 
     this.base.am.on("ready", async () => {
       this.base.scene.fog = new THREE.Fog(0x389af2, 5000, 10000);
 
+      // done
+      this.gb = new GradientBackground(this.base);
+      this.gb.addExisting();
       this.alc = new AmbientLightComponent(this.base);
       this.alc.addExisting();
       this.dlc = new DirectionalLightComponent(this.base);
       this.dlc.addExisting();
-      this.gb = new GradientBackground(this.base);
-      this.gb.addExisting();
-      this.bc = new BigCloud(this.base);
-      this.bc.addExisting();
       this.co = new Column(this.base);
       this.co.addExisting();
+      this.bc = new BigCloud(this.base);
+      this.bc.addExisting();
       this.cl = new Cloud(this.base);
       this.cl.addExisting();
       this.pl = new PolarLight(this.base);
@@ -50,6 +51,10 @@ export default class World extends kokomi.Component {
       this.sp.addExisting();
       this.hf = new HashFog(this.base);
       this.hf.addExisting();
+      // this.ro = new Road(this.base);
+      // this.ro.addExisting();
+      // this.fc = new ForwardCamera(this.base);
+      // this.fc.addExisting();
 
       await kokomi.sleep(1000);
 
