@@ -7,12 +7,14 @@ import type Experience from "../Experience";
 import GradientBackground from "./GradientBackground";
 import BigCloud from "./BigCloud";
 import Column from "./Column";
+import Cloud from "./Cloud";
 
 export default class World extends kokomi.Component {
   declare base: Experience;
   gb!: GradientBackground | null;
   bc!: BigCloud | null;
   co!: Column | null;
+  cl!: Cloud | null;
   bgm!: Howl;
   constructor(base: Experience) {
     super(base);
@@ -26,6 +28,8 @@ export default class World extends kokomi.Component {
       this.bc.addExisting();
       this.co = new Column(this.base);
       this.co.addExisting();
+      this.cl = new Cloud(this.base);
+      this.cl.addExisting();
 
       await kokomi.sleep(1000);
 
