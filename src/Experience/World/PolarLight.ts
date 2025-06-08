@@ -8,7 +8,6 @@ import polarLightVertexShader from "../Shaders/PolarLight/vert.glsl";
 import polarLightFragmentShader from "../Shaders/PolarLight/frag.glsl";
 
 import { meshList } from "../Data/polarLight";
-import config from "../config";
 
 export default class PolarLight extends kokomi.Component {
   declare base: Experience;

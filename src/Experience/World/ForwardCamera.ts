@@ -15,7 +15,7 @@ export default class ForwardCamera extends kokomi.Component {
 
     // 相机运动参数
     this.params = {
-      speed: 500, // 前进速度
+      speed: 88, // 前进速度
       isRunning: true, // 是否自动前进
     };
 

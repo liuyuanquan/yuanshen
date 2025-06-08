@@ -48,6 +48,7 @@ export default class BigCloud extends kokomi.Component {
     this.model = model;
 
     // 遍历模型中的所有 mesh，设置缩放、渲染顺序、裁剪和材质
+    // @ts-ignore
     model.scene.traverse((obj: THREE.Mesh) => {
       if (obj.isMesh) {
         obj.position.multiplyScalar(0.1); // 缩放位置

@@ -28,6 +28,7 @@ export default class Experience extends kokomi.Base {
     // 新版three.js的颜色、光照与旧版不兼容，要手动调整
     THREE.ColorManagement.enabled = false;
     this.renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
+    // @ts-ignore
     this.renderer.useLegacyLights = true;
 
     this.am = new kokomi.AssetManager(this, resources, {
